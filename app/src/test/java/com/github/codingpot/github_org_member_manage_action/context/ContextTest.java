@@ -19,15 +19,6 @@ class ContextTest {
     }
 
     @Test
-    void getMembersFileContent() throws Exception {
-        final Context context =
-                withEnvironmentVariable("INPUT_MEMBERS_FILECONTENT", "filecontent")
-                        .execute(() -> DaggerAppComponent.create().context());
-        assertTrue(context.getMembersFileContent().isPresent());
-        assertEquals("filecontent", context.getMembersFileContent().get());
-    }
-
-    @Test
     void getGithubToken() throws Exception {
         final Context context =
                 withEnvironmentVariable("INPUT_GH_TOKEN", "GITHUB_TOKEN")

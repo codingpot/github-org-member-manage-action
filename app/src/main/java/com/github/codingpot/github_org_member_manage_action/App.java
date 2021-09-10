@@ -13,6 +13,8 @@ public class App {
 
     private void run() {
         DaggerAppComponent.create().inject(this);
+
+        // Validate necessary inputs are set.
         context.error()
                 .map(
                         errorMsg -> {
