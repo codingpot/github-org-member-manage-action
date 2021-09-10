@@ -9,13 +9,9 @@ inputs:
     required: true
     default: ""
   members_filepath:
-    description: Filepath to members.yaml (Either this or members_filecontent should be provided).
-    required: false
+    description: Filepath to members.yaml.
+    required: true
     default: members.yaml
-  members_filecontent:
-    description: Filecontent of members.yaml
-    required: false
-    default: ""
 runs:
   using: docker
   image: Dockerfile
