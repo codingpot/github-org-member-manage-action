@@ -18,7 +18,7 @@ public class Context {
     Optional<String> githubToken;
 
     @Inject
-    Context(
+    public Context(
             @MembersFilePath Optional<String> membersFilePath,
             @GitHubToken Optional<String> githubToken) {
         this.membersFilePath = membersFilePath;
