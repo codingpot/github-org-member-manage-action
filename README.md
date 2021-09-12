@@ -9,7 +9,7 @@ YAML will be the single source of truth for the org memberships.
 # members.yaml
 org_name: codingpot
 
-admins:
+owners:
   - kkweon
   - kkweon2
 
@@ -26,11 +26,4 @@ steps:
     with:
       gh_token: ${{ secrets.GH_TOKEN }} # NEEDS ORG RW PERMISSION
       members_filepath: members.yaml
-      # OR you could define in the action file.
-      members_filecontent: |
-        org_name: your_org_name
-        members:
-        - kkweon1
-        admins:
-        - deep-diver
 ```
