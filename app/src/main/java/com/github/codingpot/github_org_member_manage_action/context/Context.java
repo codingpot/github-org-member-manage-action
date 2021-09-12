@@ -2,7 +2,6 @@ package com.github.codingpot.github_org_member_manage_action.context;
 
 import com.github.codingpot.github_org_member_manage_action.annotations.GitHubToken;
 import com.github.codingpot.github_org_member_manage_action.annotations.MembersFilePath;
-import java.util.Optional;
 import javax.inject.Inject;
 import lombok.Value;
 
@@ -14,30 +13,12 @@ import lombok.Value;
  */
 @Value
 public class Context {
-    Optional<String> membersFilePath;
-    Optional<String> githubToken;
+    String membersFilePath;
+    String githubToken;
 
     @Inject
-    public Context(
-            @MembersFilePath Optional<String> membersFilePath,
-            @GitHubToken Optional<String> githubToken) {
+    public Context(@MembersFilePath String membersFilePath, @GitHubToken String githubToken) {
         this.membersFilePath = membersFilePath;
         this.githubToken = githubToken;
-    }
-
-    public Optional<String> error() {
-        StringBuilder builder = new StringBuilder();
-        if (githubToken.isEmpty()) {
-            builder.append("- No $INPUT_GH_TOKEN was found\n");
-        }
-
-        if (membersFilePath.isEmpty()) {
-            builder.append("- No $MEMBERS_FILEPATH was found\n");
-        }
-
-        final String errMsg = builder.toString();
-        return errMsg.isBlank()
-                ? Optional.empty()
-                : Optional.of(String.format("Errors were found:\n%s", errMsg));
     }
 }
