@@ -1,6 +1,4 @@
-plugins {
-    id("com.diffplug.spotless") version "5.15.0"
-}
+plugins { id("com.diffplug.spotless") version "5.15.0" }
 
 spotless {
     java {
@@ -8,5 +6,16 @@ spotless {
         importOrder()
         removeUnusedImports()
         googleJavaFormat().aosp()
+    }
+
+    groovyGradle {
+        target("**/*.gradle")
+        greclipse()
+    }
+
+    kotlinGradle {
+        target("**/*.gradle.kts")
+        ktfmt()
+        ktlint()
     }
 }
