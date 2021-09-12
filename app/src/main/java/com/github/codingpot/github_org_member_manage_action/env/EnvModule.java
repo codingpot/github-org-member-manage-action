@@ -21,7 +21,8 @@ public class EnvModule {
     @Provides
     @MembersFilePath
     static Optional<String> provideMembersFilePath() {
-        return toOptional(System.getenv("INPUT_MEMBERS_FILEPATH"));
+        return toOptional(System.getenv("INPUT_MEMBERS_FILEPATH"))
+                .or(() -> Optional.of("members.yaml"));
     }
 
     private static Optional<String> toOptional(String s) {

@@ -28,11 +28,11 @@ public class Context {
     public Optional<String> error() {
         StringBuilder builder = new StringBuilder();
         if (githubToken.isEmpty()) {
-            builder.append("- GitHub token w/ admin:org access should be provided\n");
+            builder.append("- No $INPUT_GH_TOKEN was found\n");
         }
 
         if (membersFilePath.isEmpty()) {
-            builder.append("- members_filepath should be provided\n");
+            builder.append("- No $MEMBERS_FILEPATH was found\n");
         }
 
         final String errMsg = builder.toString();
