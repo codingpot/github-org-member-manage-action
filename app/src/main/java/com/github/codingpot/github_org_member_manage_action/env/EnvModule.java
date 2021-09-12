@@ -1,10 +1,12 @@
 package com.github.codingpot.github_org_member_manage_action.env;
 
+import static com.github.codingpot.github_org_member_manage_action.Constants.INPUT_GH_TOKEN;
+import static com.github.codingpot.github_org_member_manage_action.Constants.INPUT_MEMBERS_FILEPATH;
+
 import com.github.codingpot.github_org_member_manage_action.annotations.GitHubToken;
 import com.github.codingpot.github_org_member_manage_action.annotations.MembersFilePath;
 import dagger.Module;
 import dagger.Provides;
-import java.util.Optional;
 import javax.inject.Singleton;
 
 /** EnvModule provides environment variables. */
@@ -13,22 +15,21 @@ public class EnvModule {
     @Singleton
     @Provides
     @GitHubToken
-    static Optional<String> provideGitHubToken() {
-        return toOptional(System.getenv("INPUT_GH_TOKEN"));
+    static String provideGitHubToken() {
+        return withDefault(System.getenv(INPUT_GH_TOKEN), "");
     }
 
     @Singleton
     @Provides
     @MembersFilePath
-    static Optional<String> provideMembersFilePath() {
-        return toOptional(System.getenv("INPUT_MEMBERS_FILEPATH"))
-                .or(() -> Optional.of("members.yaml"));
+    static String provideMembersFilePath() {
+        return withDefault(System.getenv(INPUT_MEMBERS_FILEPATH), "members.yaml");
     }
 
-    private static Optional<String> toOptional(String s) {
-        if (s == null || s.isBlank()) {
-            return Optional.empty();
+    private static String withDefault(String env, String defaultValue) {
+        if (env == null || env.isBlank()) {
+            return defaultValue;
         }
-        return Optional.of(s);
+        return env;
     }
 }

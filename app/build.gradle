@@ -30,14 +30,16 @@ application {
 	mainClass.set(mainClassSpec)
 }
 
-tasks.test {
+test {
 	useJUnitPlatform()
 }
 
-tasks.jar {
+jar {
 	manifest {
-		attributes(
-				"Main-Class": mainClassSpec
-				)
+		attributes 'Main-Class': mainClassSpec
 	}
+	from {
+		configurations.compileClasspath.filter { it.exists() }.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

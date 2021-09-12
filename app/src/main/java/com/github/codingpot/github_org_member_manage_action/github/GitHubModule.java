@@ -1,30 +1,35 @@
 package com.github.codingpot.github_org_member_manage_action.github;
 
 import com.github.codingpot.github_org_member_manage_action.ConfigData;
+import com.github.codingpot.github_org_member_manage_action.ConfigManager;
 import com.github.codingpot.github_org_member_manage_action.context.Context;
 import dagger.Module;
 import dagger.Provides;
-import java.io.IOException;
-import java.util.Optional;
+import lombok.SneakyThrows;
 import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GitHubBuilder;
 
 @Module
 public class GitHubModule {
+    @SneakyThrows
     @Provides
-    Optional<GHOrganization> provideGitHubOrganization(Context context, ConfigData configData) {
-        return context.getGithubToken()
-                .flatMap(
-                        ghToken -> {
-                            try {
-                                return Optional.of(
-                                        new GitHubBuilder()
-                                                .withOAuthToken(ghToken)
-                                                .build()
-                                                .getOrganization(configData.getOrgName()));
-                            } catch (IOException e) {
-                                return Optional.empty();
-                            }
-                        });
+    GHOrganization provideGitHubOrganization(Context context, ConfigData configData) {
+        String ghToken = context.getGithubToken();
+        GitHubBuilder builder = new GitHubBuilder();
+        if (!ghToken.isBlank()) {
+            builder.withOAuthToken(ghToken);
+        }
+        return builder.build().getOrganization(configData.getOrgName());
+    }
+
+    @Provides
+    static GitHubService provideGitHubService(GitHubServiceV3Impl service) {
+        return service;
+    }
+
+    @SneakyThrows
+    @Provides
+    static ConfigData provideConfigData(ConfigManager manager) {
+        return manager.readFromLocal();
     }
 }

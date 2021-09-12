@@ -4,7 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 import java.io.IOException;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kohsuke.github.GHOrganization;
@@ -17,8 +16,7 @@ class GitHubServiceV3ImplTest {
     @BeforeEach
     void setUp() throws IOException {
         GHOrganization ghOrg = new GitHubBuilder().build().getOrganization("codingpot");
-        Optional<GHOrganization> organization = Optional.of(ghOrg);
-        service = new GitHubServiceV3Impl(organization);
+        service = new GitHubServiceV3Impl(ghOrg);
     }
 
     @Test

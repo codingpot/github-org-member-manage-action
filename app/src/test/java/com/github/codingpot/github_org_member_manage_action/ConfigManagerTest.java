@@ -1,13 +1,11 @@
 package com.github.codingpot.github_org_member_manage_action;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.github.codingpot.github_org_member_manage_action.context.Context;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,9 +20,7 @@ class ConfigManagerTest {
     @BeforeEach
     void setUp() throws IOException {
         path = Files.createTempFile("members", ".yaml");
-        configManager =
-                new ConfigManager(
-                        new Context(Optional.of(path.toUri().getPath()), Optional.empty()));
+        configManager = new ConfigManager(new Context(path.toUri().getPath(), "FAKE_GITHUB_TOKEN"));
 
         String yaml =
                 "org_name: orgName"
@@ -50,15 +46,14 @@ class ConfigManagerTest {
     }
 
     @Test
-    void readFromLocal() {
-        Optional<ConfigData> configData = configManager.readFromLocal();
-        assertTrue(configData.isPresent());
+    void readFromLocal() throws IOException {
+        ConfigData configData = configManager.readFromLocal();
         assertEquals(
                 ConfigData.builder()
                         .orgName("orgName")
                         .members(Set.of("member1", "member2"))
                         .owners(Set.of("owner1", "owner2"))
                         .build(),
-                configData.get());
+                configData);
     }
 }
