@@ -18,4 +18,8 @@ public class Status {
     public static Status error(String errorMessage) {
         return new Status(StatusType.ERROR, Optional.ofNullable(errorMessage));
     }
+
+    public boolean hasError() {
+        return getType() != StatusType.OK;
+    }
 }

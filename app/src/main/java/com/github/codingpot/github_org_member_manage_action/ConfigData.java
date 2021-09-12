@@ -14,6 +14,6 @@ public class ConfigData {
     @JsonProperty("org_name")
     String orgName;
 
-    Set<String> owners;
+    Set<String> admins;
     Set<String> members;
 }

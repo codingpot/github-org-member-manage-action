@@ -19,4 +19,12 @@ public class StatusOr<T> {
     public static <T> StatusOr<T> createError(String message) {
         return new StatusOr<>(Status.error(message), null);
     }
+
+    public boolean hasError() {
+        return getStatus().hasError();
+    }
+
+    public Exception toException() {
+        return new RuntimeException(String.valueOf(status.getErrorMessage()));
+    }
 }

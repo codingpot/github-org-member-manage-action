@@ -5,12 +5,13 @@ import static com.github.codingpot.github_org_member_manage_action.Constants.INP
 
 import com.github.codingpot.github_org_member_manage_action.annotations.GitHubToken;
 import com.github.codingpot.github_org_member_manage_action.annotations.MembersFilePath;
+import com.github.codingpot.github_org_member_manage_action.producers.ProducersComponent;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
 
 /** EnvModule provides environment variables. */
-@Module
+@Module(subcomponents = ProducersComponent.class)
 public class EnvModule {
     @Singleton
     @Provides

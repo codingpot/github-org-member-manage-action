@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.kohsuke.github.GHOrganization;
-import org.kohsuke.github.GHPerson;
 
 public class GitHubServiceV3Impl implements GitHubService {
     private final GHOrganization organization;
@@ -17,11 +16,20 @@ public class GitHubServiceV3Impl implements GitHubService {
     }
 
     @Override
-    public StatusOr<List<String>> listMembers() {
+    public StatusOr<List<GitHubUser>> listAdmins() {
+        return listMembersByRole(Role.ADMIN);
+    }
+
+    @Override
+    public StatusOr<List<GitHubUser>> listMembers() {
+        return listMembersByRole(Role.MEMBER);
+    }
+
+    private StatusOr<List<GitHubUser>> listMembersByRole(Role role) {
         try {
             return StatusOr.createOk(
-                    organization.listMembers().toList().stream()
-                            .map(GHPerson::getLogin)
+                    organization.listMembersWithRole(role.toString()).toList().stream()
+                            .map(u -> new GitHubUser(u.getLogin(), role))
                             .collect(Collectors.toList()));
         } catch (IOException e) {
             return StatusOr.createError(e.getMessage());

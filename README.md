@@ -9,7 +9,7 @@ YAML will be the single source of truth for the org memberships.
 # members.yaml
 org_name: codingpot
 
-owners:
+admins:
   - kkweon
   - kkweon2
 

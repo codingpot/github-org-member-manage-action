@@ -25,11 +25,11 @@ class ConfigManagerTest {
         String yaml =
                 "org_name: orgName"
                         + NEWLINE
-                        + "owners:"
+                        + "admins:"
                         + NEWLINE
-                        + "- owner1"
+                        + "- admin1"
                         + NEWLINE
-                        + "- owner2"
+                        + "- admin2"
                         + NEWLINE
                         + "members:"
                         + NEWLINE
@@ -51,8 +51,8 @@ class ConfigManagerTest {
         assertEquals(
                 ConfigData.builder()
                         .orgName("orgName")
+                        .admins(Set.of("admin1", "admin2"))
                         .members(Set.of("member1", "member2"))
-                        .owners(Set.of("owner1", "owner2"))
                         .build(),
                 configData);
     }

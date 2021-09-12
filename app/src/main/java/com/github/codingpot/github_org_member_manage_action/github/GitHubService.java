@@ -5,5 +5,7 @@ import java.util.List;
 
 /** Provide a service interacting with GitHub. */
 public interface GitHubService {
-    StatusOr<List<String>> listMembers();
+    StatusOr<List<GitHubUser>> listAdmins();
+
+    StatusOr<List<GitHubUser>> listMembers();
 }
