@@ -7,4 +7,12 @@ package com.github.codingpot.github_org_member_manage_action.status;
 public enum StatusType {
     OK,
     ERROR,
+    ;
+
+    public static StatusType merge(StatusType type, StatusType type1) {
+        if (type == OK && type1 == OK) {
+            return OK;
+        }
+        return ERROR;
+    }
 }

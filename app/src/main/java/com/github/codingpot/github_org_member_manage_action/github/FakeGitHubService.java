@@ -5,7 +5,6 @@ import com.github.codingpot.github_org_member_manage_action.status.StatusOr;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import javax.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +13,6 @@ public class FakeGitHubService implements GitHubService {
 
     @Getter @Setter private List<GitHubUser> admins;
     @Getter @Setter private List<GitHubUser> members;
-
-    @Inject
-    FakeGitHubService() {}
 
     @Override
     public StatusOr<List<GitHubUser>> listAdmins() {

@@ -3,9 +3,8 @@ package com.github.codingpot.github_org_member_manage_action;
 import com.github.codingpot.github_org_member_manage_action.config.ConfigData;
 import com.github.codingpot.github_org_member_manage_action.context.Context;
 import com.github.codingpot.github_org_member_manage_action.github.GitHubService;
-import com.github.codingpot.github_org_member_manage_action.github.GitHubUser;
 import com.github.codingpot.github_org_member_manage_action.producers.ProducersComponent;
-import java.util.List;
+import com.github.codingpot.github_org_member_manage_action.status.Status;
 import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 
@@ -21,16 +20,20 @@ public class App {
 
     private void run() throws ExecutionException, InterruptedException {
         DaggerAppComponent.create().inject(this);
-        System.out.println("context = " + context);
-        final List<GitHubUser> listStatusOr = gitHubService.listAdmins().getData();
-        System.out.println("listStatusOr = " + listStatusOr);
 
         final ProducersComponent producersComponent = builder.build();
 
         final ConfigData localConfigData = producersComponent.configDataFromLocal().get();
         System.out.println("localConfigData = " + localConfigData);
+
         final ConfigData githubConfigData = producersComponent.configDataFromGitHub().get();
         System.out.println("githubConfigData = " + githubConfigData);
+
+        final Status status = producersComponent.execute().get();
+        if (status.hasError()) {
+            System.out.println(status.getErrorMessage().orElse(""));
+            System.exit(1);
+        }
 
         System.exit(0);
     }

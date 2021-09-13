@@ -23,10 +23,10 @@ public class Status {
         return getType() != StatusType.OK;
     }
 
-    public Exception toException() {
-        if (hasError()) {
-            return new RuntimeException(getType().name() + "::" + errorMessage);
-        }
-        return null;
+    public Status merge(Status status) {
+        String m1 = errorMessage.orElse("");
+        String m2 = status.getErrorMessage().orElse("");
+        return new Status(
+                StatusType.merge(getType(), status.getType()), Optional.of(m1 + " and " + m2));
     }
 }

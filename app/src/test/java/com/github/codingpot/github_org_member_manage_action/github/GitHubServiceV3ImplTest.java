@@ -22,7 +22,7 @@ class GitHubServiceV3ImplTest {
         final GitHub gitHub =
                 new GitHubBuilder().withOAuthToken(System.getenv("INPUT_GH_TOKEN")).build();
         GHOrganization ghOrg = gitHub.getOrganization("codingpot");
-        service = new GitHubServiceV3Impl(ghOrg, gitHub);
+        service = new GitHubServiceV3Impl(ghOrg, gitHub, /*isDryRun=*/ false);
     }
 
     @Test
