@@ -5,14 +5,19 @@ import com.github.codingpot.github_org_member_manage_action.status.StatusOr;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import javax.inject.Inject;
 import org.kohsuke.github.GHOrganization;
+import org.kohsuke.github.GHUser;
+import org.kohsuke.github.GitHub;
 
 public class GitHubServiceV3Impl implements GitHubService {
     private final GHOrganization organization;
+    private final GitHub github;
 
     @Inject
-    GitHubServiceV3Impl(GHOrganization organization) {
+    GitHubServiceV3Impl(GHOrganization organization, GitHub github) {
+        this.github = github;
         this.organization = organization;
     }
 
@@ -27,13 +32,33 @@ public class GitHubServiceV3Impl implements GitHubService {
     }
 
     @Override
-    public Status addMembers(Iterable<String> asList) {
-        return null;
+    public Status addMembers(Iterable<String> newMembers) {
+        StreamSupport.stream(newMembers.spliterator(), true)
+                .forEach(
+                        u -> {
+                            try {
+                                final GHUser user = github.getUser(u);
+                                organization.add(user, GHOrganization.Role.MEMBER);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+        return Status.ok();
     }
 
     @Override
-    public Status addOwners(Iterable<String> newOwners) {
-        return null;
+    public Status addAdmins(Iterable<String> newAdmins) {
+        StreamSupport.stream(newAdmins.spliterator(), true)
+                .forEach(
+                        u -> {
+                            try {
+                                final GHUser user = github.getUser(u);
+                                organization.add(user, GHOrganization.Role.ADMIN);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+        return Status.ok();
     }
 
     private StatusOr<List<GitHubUser>> listMembersByRole(Role role) {

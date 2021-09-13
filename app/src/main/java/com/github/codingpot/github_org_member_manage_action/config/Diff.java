@@ -9,7 +9,7 @@ import lombok.Data;
 @Builder
 public class Diff {
     /** Owners to be added. */
-    private Set<String> newOwners;
+    private Set<String> newAdmins;
     /** Members to be added. */
     private Set<String> newMembers;
     /** Members to be removed from the org. */

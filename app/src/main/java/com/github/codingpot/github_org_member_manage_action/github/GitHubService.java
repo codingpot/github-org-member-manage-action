@@ -12,5 +12,5 @@ public interface GitHubService {
 
     Status addMembers(Iterable<String> asList);
 
-    Status addOwners(Iterable<String> newOwners);
+    Status addAdmins(Iterable<String> newOwners);
 }

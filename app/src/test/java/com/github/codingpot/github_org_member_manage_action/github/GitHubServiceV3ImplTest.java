@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kohsuke.github.GHOrganization;
+import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
 class GitHubServiceV3ImplTest {
@@ -18,12 +19,10 @@ class GitHubServiceV3ImplTest {
     @BeforeEach
     void setUp() throws IOException {
         assumeTrue(System.getenv("INPUT_GH_TOKEN") != null);
-        GHOrganization ghOrg =
-                new GitHubBuilder()
-                        .withOAuthToken(System.getenv("INPUT_GH_TOKEN"))
-                        .build()
-                        .getOrganization("codingpot");
-        service = new GitHubServiceV3Impl(ghOrg);
+        final GitHub gitHub =
+                new GitHubBuilder().withOAuthToken(System.getenv("INPUT_GH_TOKEN")).build();
+        GHOrganization ghOrg = gitHub.getOrganization("codingpot");
+        service = new GitHubServiceV3Impl(ghOrg, gitHub);
     }
 
     @Test

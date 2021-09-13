@@ -5,21 +5,31 @@ import com.github.codingpot.github_org_member_manage_action.config.ConfigManager
 import com.github.codingpot.github_org_member_manage_action.context.Context;
 import dagger.Module;
 import dagger.Provides;
+import javax.inject.Singleton;
 import lombok.SneakyThrows;
 import org.kohsuke.github.GHOrganization;
+import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
 @Module
 public class GitHubModule {
     @SneakyThrows
     @Provides
-    GHOrganization provideGitHubOrganization(Context context, ConfigData configData) {
+    @Singleton
+    GHOrganization provideGitHubOrganization(GitHub github, ConfigData configData) {
+        return github.getOrganization(configData.getOrgName());
+    }
+
+    @SneakyThrows
+    @Provides
+    @Singleton
+    GitHub provideGitHub(Context context) {
         String ghToken = context.getGithubToken();
         GitHubBuilder builder = new GitHubBuilder();
         if (!ghToken.isBlank()) {
             builder.withOAuthToken(ghToken);
         }
-        return builder.build().getOrganization(configData.getOrgName());
+        return builder.build();
     }
 
     @Provides

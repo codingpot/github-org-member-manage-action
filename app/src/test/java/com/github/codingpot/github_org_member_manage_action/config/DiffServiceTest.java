@@ -25,7 +25,7 @@ class DiffServiceTest {
                 DiffService.diff(local, remote),
                 equalTo(
                         Diff.builder()
-                                .newOwners(Collections.singleton("kkweon"))
+                                .newAdmins(Collections.singleton("kkweon"))
                                 .newMembers(Collections.emptySet())
                                 .membersToBeDeleted(Collections.emptySet())
                                 .build()));
@@ -47,7 +47,7 @@ class DiffServiceTest {
                 DiffService.diff(local, remote),
                 equalTo(
                         Diff.builder()
-                                .newOwners(Collections.emptySet())
+                                .newAdmins(Collections.emptySet())
                                 .newMembers(Collections.singleton("kkweon"))
                                 .membersToBeDeleted(Collections.emptySet())
                                 .build()));

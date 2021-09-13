@@ -16,14 +16,14 @@ public class DiffService {
 
     static Diff diff(ConfigData local, ConfigData remote) {
         return Diff.builder()
-                .newOwners(Sets.difference(local.getAdmins(), remote.getAdmins()))
+                .newAdmins(Sets.difference(local.getAdmins(), remote.getAdmins()))
                 .newMembers(Sets.difference(local.getMembers(), remote.getMembers()))
                 .membersToBeDeleted(Collections.emptySet())
                 .build();
     }
 
     void execute(Diff diff) throws Exception {
-        Status status = gitHubService.addOwners(diff.getNewOwners());
+        Status status = gitHubService.addAdmins(diff.getNewAdmins());
         if (status.hasError()) {
             throw status.toException();
         }
