@@ -42,7 +42,7 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["Dockerfile.prod, README.md"]
+        "assets": ["Dockerfile.prod", "README.md", "app/build/libs/app.jar"]
       }
     ]
   ]
