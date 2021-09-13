@@ -9,7 +9,6 @@
         "assets": [
           {
             "path": "app/build/libs/app.jar",
-            "label": "Main executable Jar file"
           }
         ]
       }
