@@ -3,7 +3,17 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    "@semantic-release/github",
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "app/build/libs/app.jar",
+            "label": "Main executable Jar file"
+          }
+        ]
+      }
+    ],
     [
       "@google/semantic-release-replace-plugin",
       {
