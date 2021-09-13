@@ -22,4 +22,11 @@ public class Status {
     public boolean hasError() {
         return getType() != StatusType.OK;
     }
+
+    public Exception toException() {
+        if (hasError()) {
+            return new RuntimeException(getType().name() + "::" + errorMessage);
+        }
+        return null;
+    }
 }
