@@ -1,4 +1,4 @@
-package com.github.codingpot.github_org_member_manage_action;
+package com.github.codingpot.github_org_member_manage_action.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;

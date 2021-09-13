@@ -1,4 +1,4 @@
-package com.github.codingpot.github_org_member_manage_action;
+package com.github.codingpot.github_org_member_manage_action.config;
 
 import java.util.Set;
 import lombok.Data;

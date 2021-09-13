@@ -1,5 +1,6 @@
 package com.github.codingpot.github_org_member_manage_action;
 
+import com.github.codingpot.github_org_member_manage_action.config.ConfigData;
 import com.github.codingpot.github_org_member_manage_action.context.Context;
 import com.github.codingpot.github_org_member_manage_action.github.GitHubService;
 import com.github.codingpot.github_org_member_manage_action.github.GitHubUser;

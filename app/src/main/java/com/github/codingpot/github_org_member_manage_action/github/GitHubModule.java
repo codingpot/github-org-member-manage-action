@@ -1,7 +1,7 @@
 package com.github.codingpot.github_org_member_manage_action.github;
 
-import com.github.codingpot.github_org_member_manage_action.ConfigData;
-import com.github.codingpot.github_org_member_manage_action.ConfigManager;
+import com.github.codingpot.github_org_member_manage_action.config.ConfigData;
+import com.github.codingpot.github_org_member_manage_action.config.ConfigManager;
 import com.github.codingpot.github_org_member_manage_action.context.Context;
 import dagger.Module;
 import dagger.Provides;

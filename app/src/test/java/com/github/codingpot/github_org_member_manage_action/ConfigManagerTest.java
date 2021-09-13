@@ -2,6 +2,8 @@ package com.github.codingpot.github_org_member_manage_action;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.github.codingpot.github_org_member_manage_action.config.ConfigData;
+import com.github.codingpot.github_org_member_manage_action.config.ConfigManager;
 import com.github.codingpot.github_org_member_manage_action.context.Context;
 import java.io.IOException;
 import java.nio.file.Files;

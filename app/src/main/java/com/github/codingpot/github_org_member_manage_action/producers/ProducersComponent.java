@@ -1,6 +1,6 @@
 package com.github.codingpot.github_org_member_manage_action.producers;
 
-import com.github.codingpot.github_org_member_manage_action.ConfigData;
+import com.github.codingpot.github_org_member_manage_action.config.ConfigData;
 import com.google.common.util.concurrent.ListenableFuture;
 import dagger.producers.ProductionSubcomponent;
 
