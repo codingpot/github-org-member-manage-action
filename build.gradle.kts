@@ -19,3 +19,16 @@ spotless {
         ktlint()
     }
 }
+
+task("resolveDependencies") {
+    doLast {
+        project.rootProject.allprojects.forEach { subProject ->
+            subProject.buildscript.configurations.forEach { configuration ->
+                if (configuration.isCanBeResolved) configuration.resolve()
+            }
+            subProject.configurations.forEach { configuration ->
+                if (configuration.isCanBeResolved) configuration.resolve()
+            }
+        }
+    }
+}

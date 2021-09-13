@@ -1,0 +1,6 @@
+.github
+.gradle
+.idea
+build
+.env
+members.yaml
