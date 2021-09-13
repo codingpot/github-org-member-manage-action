@@ -22,7 +22,8 @@ class ConfigManagerTest {
     @BeforeEach
     void setUp() throws IOException {
         path = Files.createTempFile("members", ".yaml");
-        configManager = new ConfigManager(new Context(path.toUri().getPath(), "FAKE_GITHUB_TOKEN"));
+        configManager =
+                new ConfigManager(new Context(path.toUri().getPath(), "FAKE_GITHUB_TOKEN", true));
 
         String yaml =
                 "org_name: orgName"

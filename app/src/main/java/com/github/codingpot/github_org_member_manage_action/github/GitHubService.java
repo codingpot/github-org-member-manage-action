@@ -10,7 +10,7 @@ public interface GitHubService {
 
     StatusOr<List<GitHubUser>> listMembers();
 
-    Status addMembers(Iterable<String> asList);
+    Status addMembers(Iterable<String> newMembers);
 
-    Status addAdmins(Iterable<String> newOwners);
+    Status addAdmins(Iterable<String> newAdmins);
 }

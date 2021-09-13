@@ -3,6 +3,8 @@ package com.github.codingpot.github_org_member_manage_action.env;
 import static com.github.codingpot.github_org_member_manage_action.Constants.INPUT_GH_TOKEN;
 import static com.github.codingpot.github_org_member_manage_action.Constants.INPUT_MEMBERS_FILEPATH;
 
+import com.github.codingpot.github_org_member_manage_action.Constants;
+import com.github.codingpot.github_org_member_manage_action.annotations.DryRun;
 import com.github.codingpot.github_org_member_manage_action.annotations.GitHubToken;
 import com.github.codingpot.github_org_member_manage_action.annotations.MembersFilePath;
 import com.github.codingpot.github_org_member_manage_action.producers.ProducersComponent;
@@ -13,6 +15,7 @@ import javax.inject.Singleton;
 /** EnvModule provides environment variables. */
 @Module(subcomponents = ProducersComponent.class)
 public class EnvModule {
+
     @Singleton
     @Provides
     @GitHubToken
@@ -25,6 +28,13 @@ public class EnvModule {
     @MembersFilePath
     static String provideMembersFilePath() {
         return withDefault(System.getenv(INPUT_MEMBERS_FILEPATH), "members.yaml");
+    }
+
+    @Singleton
+    @Provides
+    @DryRun
+    static boolean provideDryRun() {
+        return System.getenv(Constants.INPUT_DRY_RUN) != null;
     }
 
     private static String withDefault(String env, String defaultValue) {
