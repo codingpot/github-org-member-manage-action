@@ -22,7 +22,7 @@ members:
 
 ```yaml
 steps:
-  - uses: "codingpot/github-org-member-manage-action:v0"
+  - uses: "codingpot/github-org-member-manage-action:v1"
     with:
       gh_token: ${{ secrets.GH_TOKEN }} # (required) Needs admin:org permission
       members_filepath: members.yaml # (optional)

@@ -45,6 +45,8 @@ jobs:
         id: semantic
         with:
           semantic_version: 17
+          extra_plugins: |
+            @google/semantic-release-replace-plugin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -62,7 +64,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/codingpot/pr12er
+          images: ghcr.io/codingpot/github-org-member-manage-action
           tags: |
             type=raw,value=${{ needs.release.outputs.new_release_major_version }}
             type=raw,value=${{ needs.release.outputs.new_release_major_version }}.${{ needs.release.outputs.new_release_minor_version }}
