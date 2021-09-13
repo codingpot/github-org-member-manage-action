@@ -1,5 +1,8 @@
 name: GitHub Org Member Manage Action
 description: Manage GitHub org memberships in a declarative way.
+branding:
+  icon: 'at-sign'  
+  color: 'green'
 
 # Inputs are provided as ENVIRONMENT VARIABLES WITH INPUT_ prefix (e.g., INPUT_MEMBERS_FILEPATH).
 # See https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#inputs.
