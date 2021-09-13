@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openjdk:11 as build
 
 ENV APP_HOME=/codingpot
 WORKDIR $APP_HOME
@@ -12,4 +12,6 @@ RUN ./gradlew resolveDependencies
 COPY . $APP_HOME
 RUN ./gradlew build
 
-ENTRYPOINT java -jar app/build/libs/app.jar
+FROM gcr.io/distroless/java:11
+COPY --from=build /codingpot/app/build/libs/app.jar /codingpot/
+CMD ["/codingpot/app.jar"]
