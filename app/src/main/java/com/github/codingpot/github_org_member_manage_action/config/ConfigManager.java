@@ -23,4 +23,16 @@ public class ConfigManager {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         return mapper.readValue(new File(filepath), ConfigData.class);
     }
+
+    public void write(ConfigData data) throws IOException {
+        if (context.isDryRun()) {
+            System.out.printf(
+                    "Not going to write because it's a dry run but %s will be written to %s%n",
+                    data, context.getMembersFilePath());
+            return;
+        }
+        var filepath = this.context.getMembersFilePath();
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        mapper.writeValue(new File(filepath), data);
+    }
 }

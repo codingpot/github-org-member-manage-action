@@ -41,7 +41,7 @@ public class GitHubServiceV3Impl implements GitHubService {
                         u -> {
                             try {
                                 if (isDryRun) {
-                                    System.out.printf("Adding a new member: %s", u);
+                                    System.out.printf("Adding a new member: %s%n", u);
                                     return;
                                 }
 
@@ -61,7 +61,7 @@ public class GitHubServiceV3Impl implements GitHubService {
                         u -> {
                             try {
                                 if (isDryRun) {
-                                    System.out.printf("Adding a new admin: %s", u);
+                                    System.out.printf("Adding a new admin: %s%n", u);
                                     return;
                                 }
                                 final GHUser user = github.getUser(u);

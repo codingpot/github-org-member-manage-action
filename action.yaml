@@ -12,6 +12,17 @@ inputs:
     description: Filepath to members.yaml.
     required: true
     default: members.yaml
+  dry_run:
+    description: Does not update any memberships but just fetch only
+    required: false
+  mode:
+    description: >
+      There are 2 modes (sync|write).
+      "sync" mode will try to update memberships.
+      "write" mode will just fetch data and write YAML in `members_filepath`.
+    required: false
+    default: sync
+
 runs:
   using: docker
   image: Dockerfile

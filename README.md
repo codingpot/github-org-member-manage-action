@@ -24,6 +24,8 @@ members:
 steps:
   - uses: "codingpot/github-org-member-manage-action:v0"
     with:
-      gh_token: ${{ secrets.GH_TOKEN }} # NEEDS ORG RW PERMISSION
-      members_filepath: members.yaml
+      gh_token: ${{ secrets.GH_TOKEN }} # (required) Needs admin:org permission
+      members_filepath: members.yaml # (optional)
+      dry_run: false # (optional)
+      mode: sync # (optional) write or sync
 ```
