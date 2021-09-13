@@ -40,8 +40,8 @@ public class GitHubServiceV3Impl implements GitHubService {
                 .forEach(
                         u -> {
                             try {
+                                System.out.printf("Adding a new member: %s%n", u);
                                 if (isDryRun) {
-                                    System.out.printf("Adding a new member: %s%n", u);
                                     return;
                                 }
 
@@ -60,8 +60,8 @@ public class GitHubServiceV3Impl implements GitHubService {
                 .forEach(
                         u -> {
                             try {
+                                System.out.printf("Adding a new admin: %s%n", u);
                                 if (isDryRun) {
-                                    System.out.printf("Adding a new admin: %s%n", u);
                                     return;
                                 }
                                 final GHUser user = github.getUser(u);

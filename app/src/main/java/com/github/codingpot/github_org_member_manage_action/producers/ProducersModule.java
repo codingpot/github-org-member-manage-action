@@ -36,7 +36,7 @@ public class ProducersModule {
     @Produces
     @AddAdminsStatusInternal
     static Status addAdmins(GitHubService service, Diff diff) {
-        service.addMembers(diff.getNewAdmins());
+        service.addAdmins(diff.getNewAdmins());
         return Status.ok();
     }
 
