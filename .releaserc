@@ -10,7 +10,7 @@
         "replacements": [
           {
             "files": ["Dockerfile.prod"],
-            "from": "ghcr.io/codingpot/github-org-member-manage-action:.",
+            "from": "ghcr.io/codingpot/github-org-member-manage-action:.*",
             "to": "ghcr.io/codingpot/github-org-member-manage-action:${nextRelease.version}",
             "results": [
               {
@@ -24,7 +24,7 @@
           },
           {
             "files": ["README.md"],
-            "from": "\"codingpot/github-org-member-manage-action:v.\"",
+            "from": "\"codingpot/github-org-member-manage-action:v.*\"",
             "to": "\"codingpot/github-org-member-manage-action:v${nextRelease.version}\"",
             "results": [
               {
