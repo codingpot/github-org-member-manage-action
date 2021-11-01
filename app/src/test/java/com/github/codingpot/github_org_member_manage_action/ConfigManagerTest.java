@@ -1,6 +1,7 @@
 package com.github.codingpot.github_org_member_manage_action;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import com.github.codingpot.github_org_member_manage_action.config.ConfigData;
 import com.github.codingpot.github_org_member_manage_action.config.ConfigManager;
@@ -25,7 +26,7 @@ class ConfigManagerTest {
         configManager =
                 new ConfigManager(
                         new Context(
-                                path.toUri().getPath(), "FAKE_GITHUB_TOKEN", true, AppMode.SYNC));
+                                path.toUri().getPath(), "FAKE_GITHUB_TOKEN", false, AppMode.SYNC));
 
         String yaml =
                 "org_name: orgName"
@@ -60,5 +61,22 @@ class ConfigManagerTest {
                         .members(Set.of("member1", "member2"))
                         .build(),
                 configData);
+    }
+
+    @Test
+    void testYamlWriteDoesNotContainsUnnecessaryThings() throws IOException {
+        configManager.write(
+                ConfigData.builder()
+                        .orgName("orgName")
+                        .admins(Set.of("admin1"))
+                        .members(Set.of("member1"))
+                        .build());
+        final String s = Files.readString(path);
+
+        // should not double quote.
+        assertFalse(s.contains("\""));
+
+        // should not add a start header.
+        assertFalse(s.contains("---"));
     }
 }

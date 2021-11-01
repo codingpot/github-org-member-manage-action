@@ -2,6 +2,7 @@ package com.github.codingpot.github_org_member_manage_action.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
 import com.github.codingpot.github_org_member_manage_action.context.Context;
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +33,11 @@ public class ConfigManager {
             return;
         }
         var filepath = this.context.getMembersFilePath();
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        ObjectMapper mapper =
+                new ObjectMapper(
+                        new YAMLFactory()
+                                .enable(YAMLGenerator.Feature.MINIMIZE_QUOTES)
+                                .disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER));
         mapper.writeValue(new File(filepath), data);
     }
 }
