@@ -1,5 +1,7 @@
 {
-  "branches": ["main"],
+  "branches": [
+    "main"
+  ],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
@@ -8,7 +10,7 @@
       {
         "assets": [
           {
-            "path": "app/build/libs/app.jar",
+            "path": "app/build/libs/app.jar"
           }
         ]
       }
@@ -18,7 +20,9 @@
       {
         "replacements": [
           {
-            "files": ["Dockerfile"],
+            "files": [
+              "Dockerfile"
+            ],
             "from": "ghcr.io/codingpot/github-org-member-manage-action:.*",
             "to": "ghcr.io/codingpot/github-org-member-manage-action:${nextRelease.version.split('.')[0]}",
             "results": [
@@ -32,9 +36,11 @@
             "countMatches": true
           },
           {
-            "files": ["README.md"],
-            "from": "\"codingpot/github-org-member-manage-action:v.*\"",
-            "to": "\"codingpot/github-org-member-manage-action:v${nextRelease.version.split('.')[0]}\"",
+            "files": [
+              "README.md"
+            ],
+            "from": "\"codingpot/github-org-member-manage-action@v.*\"",
+            "to": "\"codingpot/github-org-member-manage-action@v${nextRelease.version.split('.')[0]}\"",
             "results": [
               {
                 "file": "README.md",
@@ -51,7 +57,10 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["Dockerfile", "README.md"]
+        "assets": [
+          "Dockerfile",
+          "README.md"
+        ]
       }
     ]
   ]
