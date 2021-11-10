@@ -28,9 +28,7 @@
             "results": [
               {
                 "file": "Dockerfile",
-                "hasChanged": true,
-                "numMatches": 1,
-                "numReplacements": 1
+                "numMatches": 1
               }
             ],
             "countMatches": true
@@ -44,9 +42,7 @@
             "results": [
               {
                 "file": "README.md",
-                "hasChanged": true,
-                "numMatches": 1,
-                "numReplacements": 1
+                "numMatches": 1
               }
             ],
             "countMatches": true
