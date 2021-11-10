@@ -20,7 +20,7 @@
           {
             "files": ["Dockerfile"],
             "from": "ghcr.io/codingpot/github-org-member-manage-action:.*",
-            "to": "ghcr.io/codingpot/github-org-member-manage-action:${nextRelease.version}",
+            "to": "ghcr.io/codingpot/github-org-member-manage-action:${nextRelease.version.split('.')[0]}",
             "results": [
               {
                 "file": "Dockerfile",
@@ -34,7 +34,7 @@
           {
             "files": ["README.md"],
             "from": "\"codingpot/github-org-member-manage-action:v.*\"",
-            "to": "\"codingpot/github-org-member-manage-action:v${nextRelease.version}\"",
+            "to": "\"codingpot/github-org-member-manage-action:v${nextRelease.version.split('.')[0]}\"",
             "results": [
               {
                 "file": "README.md",
