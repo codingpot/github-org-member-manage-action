@@ -4,25 +4,31 @@ branding:
   icon: 'at-sign'  
   color: 'green'
 
-# Inputs are provided as ENVIRONMENT VARIABLES WITH INPUT_ prefix (e.g., INPUT_MEMBERS_FILEPATH).
 # See https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#inputs.
 inputs:
   gh_token:
-    description: GitHub Token with admin:org access
+    description: >
+      A GitHub token with `admin:org` scope.
+      This is required to manage organization memberships.
+      It is recommended to use a secret to store the token.
     required: true
-    default: ""
   members_filepath:
-    description: Filepath to members.yaml.
-    required: true
+    description: >
+      The file path to the YAML file containing the list of members.
+      This file will be the single source of truth for the organization's memberships.
+    required: false
     default: members.yaml
   dry_run:
-    description: Does not update any memberships but just fetch only
+    description: >
+      If set to `true`, the action will only print the changes that would be made,
+      without actually applying them. This is useful for testing and debugging.
     required: false
+    default: "false"
   mode:
     description: >
-      There are 2 modes (sync|write).
-      "sync" mode will try to update memberships.
-      "write" mode will just fetch data and write YAML in `members_filepath`.
+      The mode of operation for the action. There are two modes available: `sync` and `write`.
+      - `sync`: This mode synchronizes the organization's memberships with the state defined in the `members_filepath` file. It will add, remove, and update members as needed to match the YAML file.
+      - `write`: This mode fetches the current organization memberships and writes them to the `members_filepath` file. This is useful for initializing the a new `members.yaml` file.
     required: false
     default: sync
 
