@@ -68,24 +68,37 @@ members:
 
 ## Development
 
-This section guides you through setting up your development environment, building, and testing the action locally.
+This section guides you through setting up your development environment and testing the action locally.
 
 ### Prerequisites
 
-- [Docker](https.docker.com/get-started)
+- [Java](httpshttps://www.java.com/en/download/)
 - [Gradle](https://gradle.org/install/)
 
-### Building
+### Local Testing
 
-To build the Docker image for the action, run the following command:
+1. Create a `members.yaml` file in the root of the project with the `org_name` of the organization you want to manage.
 
-```bash
-docker build -t github-org-member-manage-action .
-```
+   ```yaml
+   # members.yaml
+   org_name: your-org-name
+   ```
 
-### Testing
+2. Run the action in `write` mode to fetch the current members of the organization and populate the `members.yaml` file. You will need to provide a GitHub token with `admin:org` scope as an environment variable.
 
-To run the tests, use the following command:
+   ```shell
+   INPUT_GH_TOKEN=<your-github-token> INPUT_MODE=write INPUT_MEMBERS_FILEPATH=$PWD/members.yaml ./gradlew run
+   ```
+
+3. After the `members.yaml` file is populated, you can run the action in `sync` mode to test the synchronization logic. It's recommended to run with `INPUT_DRY_RUN=true` first to preview the changes.
+
+   ```shell
+   INPUT_GH_TOKEN=<your-github-token> INPUT_MODE=sync INPUT_DRY_RUN=true INPUT_MEMBERS_FILEPATH=$PWD/members.yaml ./gradlew run
+   ```
+
+### Unit Tests
+
+To run the unit tests, use the following command:
 
 ```bash
 ./gradlew test
