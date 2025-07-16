@@ -1,4 +1,9 @@
-plugins { id("com.diffplug.spotless") version "5.15.0" }
+plugins {
+    id("com.diffplug.spotless") version "7.+"
+    id("com.github.ben-manes.versions") version "+"
+}
+
+repositories { mavenCentral() }
 
 spotless {
     java {

@@ -8,6 +8,7 @@ import lombok.Value;
 public class Status {
     /** Contains the type of the Status. */
     StatusType type;
+
     /** This should be only populated when {@link #type} is not {@link StatusType#OK}. */
     Optional<String> errorMessage;
 
