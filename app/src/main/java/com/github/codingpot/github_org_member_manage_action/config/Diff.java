@@ -10,8 +10,10 @@ import lombok.Data;
 public class Diff {
     /** Owners to be added. */
     private Set<String> newAdmins;
+
     /** Members to be added. */
     private Set<String> newMembers;
+
     /** Members to be removed from the org. */
     private Set<String> membersToBeDeleted;
 }
