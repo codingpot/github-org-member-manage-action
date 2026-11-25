@@ -5,6 +5,7 @@ import com.github.codingpot.github_org_member_manage_action.annotations.DryRun;
 import com.github.codingpot.github_org_member_manage_action.annotations.GitHubToken;
 import com.github.codingpot.github_org_member_manage_action.annotations.MembersFilePath;
 import javax.inject.Inject;
+import lombok.ToString;
 import lombok.Value;
 
 /**
@@ -16,7 +17,7 @@ import lombok.Value;
 @Value
 public class Context {
     String membersFilePath;
-    String githubToken;
+    @ToString.Exclude String githubToken;
     boolean dryRun;
     AppMode mode;
 
